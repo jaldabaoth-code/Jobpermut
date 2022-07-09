@@ -1,0 +1,31 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{{ form_start(form, {'attr': {'id': 'button-visitor'}}) }}
+<div class="visitorForm d-flex flex-column justify-content-center text-dark bg-light rounded-5 p-4">
+    <h2 class="text-warning text-center mb-1 h1">Evaluez votre trajet</h2>
+    <h3 class="h3 fw-light text-center">domicile-travail</h3>
+    {% for message in app.flashes('geocode') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="col-12 col-md-12 mt-5">
+        {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
+        {{ form_widget(form.homeCity, {
+            'attr': {
+                'placeholder': 'Meaux',
+                'class': 'form-control shadow-sm bg-white rounded mt-2 p-3'
+            }
+        }) }}
+    </div>
+    <div class="col-12 col-md-12 mt-4">
+        {{ form_label(form.workCity, 'Votre Ville de Travail') }}
+        {{ form_widget(form.workCity, {
+            'attr': {
+                'placeholder': 'Paris',
+                'class': 'form-control shadow-sm bg-white rounded mt-2 p-3'
+            }
+        }) }}
+    </div>
+    <button class="btn btn-warning form-check col-12 p-3 mt-4">Evaluez!</button>
+</div>
+{{ form_end(form) }}

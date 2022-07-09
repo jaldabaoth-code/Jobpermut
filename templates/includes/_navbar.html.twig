@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg bg-white navbar-color">
+	<div class="container-fluid">
+		<a class="navbar-brand logo-navbar col-3" href="{{ path('home') }}">
+			<img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">
+			Jobpermut
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<i class="fas fa-bars"></i>
+		</button>
+		<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				{% if not app.user %}
+					<a class="nav-link" href="{{ path('app_register') }}">
+						<i class="fas fa-sign-in-alt"></i>
+						Inscription
+					</a>
+				{% endif %}
+				{% if app.user %}
+					<a class="nav-link text-primary me-2" href="{{ path("permutsearch") }}">
+						Permut Search
+					</a>
+					<div class="dropdown">
+						<a class="nav-link dropdown-toggle text-primary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+							Bonjour
+							<span class="text-warning">{{ app.user.username }}</span>
+							<img class="rounded-circle profile-avatar ms-1" src="{{ app.user.avatar ? vich_uploader_asset(app.user, 'avatarFile')|src : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }}" alt="avatar-user">
+						</a>
+						<ul class="dropdown-menu shadow-lg" aria-labelledby="dropdownMenuLink">
+							{% if app.user and not is_granted('ROLE_ADMIN') and app.user.registeredUser and app.user.registeredUser.subscription is null %}
+								<li>
+									<a class="dropdown-item text-wrap text-warning fw-normal py-2" href="{{ path('subscription_new') }}">
+										<i class="fas fa-crown me-2"></i>Premium</a>
+								</li>
+							{% endif %}
+							<li>
+								<a class="dropdown-item text-wrap text-dark py-2" href="{{ path('profile_show', {username: app.user.username}) }}">
+									<i class="fas fa-user me-2"></i>Voir mon profil</a>
+							</li>
+							<li>
+								<a class="dropdown-item text-wrap text-dark py-2" href="{{ path('profile_edit', {username: app.user.username}) }}">
+									<i class="fas fa-pen me-2"></i>Editer mon profil</a>
+							</li>
+							<li>
+								<a class="dropdown-item text-wrap text-dark py-2" href="{{ path('setting', {username: app.user.username}) }}">
+									<i class="fas fa-cog me-2"></i>Paramètres</a>
+							</li>
+							{% if app.user and app.user.registeredUser and app.user.registeredUser.subscription %}
+								<li>
+									<a class="dropdown-item text-wrap text-dark py-2" href="{{ path('profile_showLike', {username: app.user.username}) }}">
+										<i class="fas fa-heart me-2"></i>Vos likes</a>
+								</li>
+								<li>
+									<a class="dropdown-item text-wrap text-dark py-2" href="{{ path('match') }}">
+										<i class="fas fa-hand-holding-heart me-2"></i>Vos matchs
+										{{ render(controller('App\\Controller\\LikeController::matchCount')) }}
+									</a>
+								</li>
+							{% else %}
+								<li>
+									<a class="dropdown-item text-wrap text-secondary py-2 disabled" href="{{ path('profile_showLike', {username: app.user.username}) }}">
+										<i class="fas fa-heart me-2"></i>Vos likes</a>
+								</li>
+								<li>
+									<a class="dropdown-item text-wrap text-secondary py-2 disabled" href="{{ path('match') }}">
+										<i class="fas fa-hand-holding-heart me-2"></i>Vos matchs
+									</a>
+								</li>
+							{% endif %}
+							{% if is_granted('ROLE_ADMIN') %}
+								<li>
+									<a class="dropdown-item text-wrap text-warning py-2" href="{{ path('admin_index') }}">
+										<i class="fas fa-tools me-2"></i>Administration</a>
+								</li>
+							{% endif %}
+							<li>
+								<a class="dropdown-item text-wrap text-danger py-2" href="{{ path('app_logout') }}">
+									<i class="fas fa-sign-out-alt me-1"></i>
+									Déconnexion
+								</a>
+							</li>
+						</ul>
+					</div>
+				{% else %}
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
+                        <i class="fas fa-user"></i>
+                        Connexion
+                    </a>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+</nav>
+{{ app.session.set('last_route', {route: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}
+{% if not app.user %}
+    {{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
+{% endif %}

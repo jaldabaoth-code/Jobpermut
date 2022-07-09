@@ -1,0 +1,98 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block title %}Gestion utilisateurs
+{% endblock %}
+
+{% block body %}
+    <main class="py-2">
+        <div class="page-title">
+            <h1 class="h1 text-center py-1">
+                Gestion des utilisateurs</h1>
+            <h2 class="h3 text-center py-1">Supprimer ou accéder aux comptes utilisateurs</h2>
+        </div>
+        <a href="{{ path('admin_index') }}" class="btn btn-primary m-2">Accueil</a>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <div class="d-flex justify-content-center">
+                            <th>Email</th>
+                            <th>Rôles</th>
+                            <th>Date de création</th>
+                            <th>Pseudo</th>
+                            <th class="text-center">Actions</th>
+                        </div>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% if user.roles == ["ROLE_USER"] %}
+                                    <span class="text-primary">
+                                        Utilisateur
+                                    </span>
+
+                                {% elseif user.roles == ["ROLE_ADMIN",
+                                                            "ROLE_USER"] %}
+
+                                    <span class="text-warning">
+                                        Administrateur
+                                    </span>
+
+                                {% elseif user.roles == ["ROLE_SUPERADMIN",
+                                                            "ROLE_USER"] %}
+
+                                    <span class="text-danger">
+                                        Super-Administrateur
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+                            <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                            <td>{{ user.username }}</td>
+                            <td class="d-flex justify-content-center flex-row">
+
+                                {% if user.roles == ["ROLE_SUPERADMIN",
+                                                        "ROLE_USER"] and app.user.roles != user.roles %}
+
+                                    {% else %}
+
+                                        <a href="{{ path('profile_show', {username: user.username}) }}" class="btn fas fa-eye text-primary"></a>
+
+                                {% endif %}
+
+                                {% if user.roles == ["ROLE_SUPERADMIN",
+                                                        "ROLE_USER"] %}
+
+                                    {% elseif user.roles == ["ROLE_ADMIN",
+                                                                "ROLE_USER"] and app.user.roles == ["ROLE_ADMIN",
+                                                                                                        "ROLE_USER"] %}
+
+                                    {% else %}
+
+                                        {{ include('user/_delete_form.html.twig') }}
+
+                                {% endif %}
+
+                            </td>
+                        </tr>
+
+                    {% else %}
+
+                        <tr>
+                            <td colspan="7">Il n'y a aucun utilisateur inscrit.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+{% endblock %}

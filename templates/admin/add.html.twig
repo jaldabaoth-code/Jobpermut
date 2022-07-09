@@ -1,0 +1,52 @@
+{% extends 'layout.html.twig' %}
+
+{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Inscription
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-center container col-md-12 mt-4">
+    <div class="row w-100">
+
+        {% for flash_error in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+        {% endfor %}
+        <div class="page-title">
+            <h1 class="h1 text-center py-1">
+                Ajout d'administrateur</h1>
+                <h2 class="h3 text-center py-1">Créer un compte administrateur</h2>
+        </div>
+        <a href="{{ path('admin_index') }}" class="btn btn-primary col-2 m-2">Accueil</a>
+
+        {{ form_start(registrationForm) }}
+        {{ form_label(registrationForm.username, null,
+                    {label: 'Veuillez choisir un pseudonyme', 'label_attr': {'class': 'h6'}}) }}
+        {{ form_widget(registrationForm.username,
+                    {'attr': {'placeholder': 'Nom de l\'administrateur', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                {{ form_label(registrationForm.email, null,
+                    {label: 'Veuillez saisir une adresse email', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.email,
+                    {'attr': {'placeholder': 'exemple@mail.com', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                {{ form_label(registrationForm.plainPassword.first, null,
+                    {label: 'Veuillez saisir un Mot de passe', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.plainPassword.first,
+                    {'attr': {'placeholder': 'Mot de passe', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                {{ form_label(registrationForm.plainPassword.second, null,
+                    {label: 'Veuillez répéter votre Mot de passe', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.plainPassword.second,
+                    {'attr': {'placeholder': 'Répéter votre mot de passe', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                <button type="submit" class="btn btn-lg btn-primary col-12 mb-5">Créer le compte</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

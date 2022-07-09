@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('setting') }}
+{% endblock %}
+
+{% block title %}
+	{{ parent() }}
+	- Paramètres
+{% endblock %}
+
+{% block body %}
+	<main class="p-5 setting">
+		<h1 class="h1 text-center text-dark">Paramètres</h1>
+		<h2 class="h3 text-center text-dark">Mettez à jour vos informations de connexion, et réglez vos paramètres</h2>
+
+		<div class="d-flex justify-content-center">
+			{{ include('setting/_form.html.twig') }}
+		</div>
+	</main>
+{% endblock %}

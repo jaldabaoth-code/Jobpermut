@@ -1,0 +1,119 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    -
+    {{ user.username }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('profileMap') }}
+    {{ encore_entry_script_tags('like') }}
+{% endblock %}
+
+{% block body %}
+    <main class="container p-md-5 p-1">
+        <div class="profile bg-dark p-lg-5 p-4">
+            <div class="profile-header d-flex justify-content-between">
+                <div class="d-flex flex-direction-row align-items-center">
+                    <img class="rounded-circle me-4" src="{{ user.avatar ? vich_uploader_asset(user, 'avatarFile')|src : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }}" alt="avatar-user">
+                    <div class="profile-titles">
+                        <div class="d-flex flex-row align-items-center">
+                            <h1 class="h1 text-warning m-0">
+                                {% if user.registeredUser.firstname is not defined and user.registeredUser.lastname is not defined %}
+                                    {{ user.username }}
+                                {% else %}
+                                    {{ user.registeredUser.firstname }}
+                                    {{ user.registeredUser.lastname }}
+                                {% endif %}
+                            </h1>
+                            {% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
+                                <i class="fas fa-crown ms-2"></i>
+                            {% endif %}
+                        </div>
+                        <h2 class="h3 m-0">
+                            {% if user.registeredUser.rome is defined and user.registeredUser.rome is not null %}
+                                {{ user.registeredUser.rome.name }}
+                            {% else %}
+                                Non renseigné
+                            {% endif %}
+                        </h2>
+                    </div>
+                </div>
+                {% if app.user is not empty and app.user.id != user.id and app.user.registeredUser and app.user.registeredUser.subscription %}
+                    <a href="{{ path('like', {user: user.id}) }}" class="heart">
+                        <i class="{{ app.user.getOneUserLike(user.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
+                    </a>
+                {% endif %}
+            </div>
+            <div class="profile-body mt-5">
+                <div class="mb-5">
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Ville de domicile">
+                        <i class="fas fa-home me-3"></i>
+                        <p class="ms-1 m-0 p-0">{{ user.registeredUser.city ?? "Non renseigné" }}</p>
+                    </div>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Ville de travail">
+                        <i class="fas fa-briefcase me-3"></i>
+                        <p class="m-0 p-0">{{ user.registeredUser.cityJob ?? "Non renseigné" }}</p>
+                    </div>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Numéro de téléphone">
+                        <i class="fas fa-phone-alt me-3"></i>
+                        <p class="m-0 p-0">{{ user.registeredUser.phone ?? "Non renseigné" }}</p>
+                    </div>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Email">
+                        <i class="fas fa-at me-3"></i>
+                        <p class="m-0 p-0">{{ user.registeredUser.user.email ?? "Non renseigné" }}</p>
+                    </div>
+                </div>
+                {% if app.user and app.user.registeredUser.subscription is defined and app.user.registeredUser.subscription is not null %}
+                    {% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
+                    <div class="mt-5 ms-1">
+                        <div class="d-flex flex-direction-column align-items-center mb-3" title="Fonction">
+                            <i class="fas fa-wrench me-3"></i>
+                            <p class="m-0 p-0">{{ user.registeredUser.subscription.ogrName ?? "Fonction non renseignée" }}</p>
+                        </div>
+                        {% if user.registeredUser.subscription.curriculum is defined and user.registeredUser.subscription.curriculum is not null %}
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="CV">
+                                <i class="fas fa-file me-3"></i>
+                                <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'curriculumFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir le CV</a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="CV">
+                                <i class="fas fa-file me-3"></i>
+                                <p class="m-0 p-0 fst-italic text-decoration-underline">CV non transmis</p>
+                            </div>
+                        {% endif %}
+                        {% if user.registeredUser.subscription.jobDescription is defined and user.registeredUser.subscription.jobDescription is not null %}
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="Fiche de poste">
+                                <i class="fas fa-file-alt me-3"></i>
+                                <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'jobDescriptionFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir la fiche de poste</a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="Fiche de poste">
+                                <i class="fas fa-file-alt me-3"></i>
+                                <p class="m-0 p-0 fst-italic text-decoration-underline">Fiche de poste non transmise</p>
+                            </div>
+                        {% endif %}
+                        {% if app.user and app.user == user %}
+                            <a class="btn btn-sm btn-light mb-5" href="{{ path('subscription_edit', {subscription: user.registeredUser.subscription.id}) }}">Modifier mon compte premium</a>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% else %}
+                 <a href="{{ path('subscription_new') }}" class="btn btn-warning mb-4">
+                        <i class="fas fa-crown me-2"></i>Devenir Premium</a>
+            {% endif %}
+            </div>
+            {% if userData %}
+                <input type="hidden" id="userData" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+                <div id="map"></div>
+            {% endif %}
+        </div>
+    </main>
+{% endblock %}

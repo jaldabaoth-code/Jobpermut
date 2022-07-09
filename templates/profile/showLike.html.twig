@@ -1,0 +1,270 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('permutsearch') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    - Permut Search
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('permutMap') }}
+    {{ encore_entry_script_tags('like') }}
+{% endblock %}
+
+{% block body %}
+    <main class="container py-5 permutsearch">
+        <header class="mb-5">
+            <h1 class="h1 text-center text-dark">Vos Permut Likes</h1>
+            <h2 class="h2 text-center text-dark">Retrouvez les personnes que vous avez/vous ont like</h2>
+        </header>
+
+        {% if app.user.registeredUser.subscription %}
+            <input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+            <div>
+                <h3 class="h2 text-center text-primary m-3">Personnes que vous avez Like</h3>
+                {% if regUsersData %}
+                    {% for reguser in regUsersData %}
+                        {% if reguser.registeredUser.user.isVisible == true %}
+                            <div class="permut-card mb-2">
+                                <input type="hidden" id="reguser-data-{{ loop.index }}" value="{{ reguser.userHome.0 ~ '/' ~ reguser.userHome.1 ~ '/' ~ reguser.userWork.0 ~ '/' ~ reguser.userWork.1 }}">
+                                <div class="permut-header mb-lg-3 mb-1 d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between">
+                                    <div class="d-flex flex-row align-items-center text-white">
+                                        <img class="rounded-circle me-4" src="{{ reguser.registeredUser.user.avatar ? vich_uploader_asset(reguser.registeredUser.user, 'avatarFile')|src : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }}" alt="avatar-user">
+                                        <div class="title-card">
+                                            <div class="d-flex flex-row justify-content-between">
+                                                <div class="d-flex flex-row">
+                                                    <h3 class="h2 mb-1 text-warning">{{ reguser.registeredUser.user.username }}</h3>
+                                                    {% if reguser.registeredUser.subscription is defined and reguser.registeredUser.subscription is not null %}
+                                                        <i class="fas fa-crown ms-2"></i>
+                                                    {% endif %}
+                                                </div>
+                                                {% if app.user.registeredUser.subscription %}
+                                                    <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
+                                                        <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-sm ms-3"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="text-info time-gained time-sm me-4">
+                                                <i class="fas fa-bolt"></i>
+                                                {{ reguser.timeGained }}
+                                                min
+                                            </div>
+                                            <h4 class="h3 text-wrap mb-2">
+                                                {% if reguser.registeredUser.rome is defined %}
+                                                    {{ reguser.registeredUser.rome.name }}
+                                                {% else %}
+                                                    Secteur d'activité non renseigné
+                                                {% endif %}
+                                            </h4>
+                                            <div class="d-flex flex-md-row flex-column pt-1">
+                                                <h5 class="mb-md-0 mb-1 me-md-3 me-0">
+                                                    <i class="fas fa-home me-1 text-info"></i>
+                                                    {{ reguser.registeredUser.city ?? "Lieu de domicile non renseignée" }}
+                                                </h5>
+                                                <h5 class="mb-0">
+                                                    <i class="fas fa-briefcase me-1 text-info"></i>
+                                                    {{ reguser.registeredUser.cityJob ?? "Lieu de travail non renseignée" }}
+                                                </h5>
+                                            </div>
+                                            <div class="d-flex flex-md-row flex-column mt-4">
+                                                <a id="button-{{ loop.index }}-a" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-sm me-md-2 me-0 mb-3 mb-md-0">Voir plus</a>
+                                                <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-sm">Voir le profil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-md-row flex-column align-items-md-center mt-md-0 mt-4">
+                                        <div class="text-info time-gained time-md me-4">
+                                            <i class="fas fa-bolt"></i>
+                                            {{ reguser.timeGained }}
+                                            min
+                                        </div>
+                                        <a id="button-{{ loop.index }}-b" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-lg mb-md-0 mb-2">Voir plus</a>
+                                        <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-lg ms-md-3 mb-2 mb-md-0 ms-0">Voir le profil</a>
+                                        {% if app.user.registeredUser.subscription %}
+                                            <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
+                                                <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="collapse permut-body row row-cols-1 row-cols-md-2 mb-4" id="collapse-main-{{ loop.index }}">
+                                    <div class="map col pe-lg-3 ps-lg-2 p-md-1 p-3">
+                                        <div id="map-before-{{ loop.index }}" class="permutMap map-before shadow"></div>
+                                        <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="text-danger trajet">
+                                                <i class="fas fa-times-circle me-2"></i>
+                                                Vos trajets actuels
+                                                <i class="fas fa-arrow-down ms-3"></i>
+                                            </a>
+                                        </div>
+                                        <div class="collapse mt-2" id="collapse-{{ loop.index }}">
+                                            <div class="card card-body bg-dark text-white">
+                                                {% include "permutsearch/_tripSummary1.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="map col pe-lg-3 ps-lg-2 p-md-1 p-3">
+                                        <div id="map-after-{{ loop.index }}" class="permutMap map-after shadow"></div>
+                                        <div class="title-courses bg-white p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="text-success trajet">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                Vos futurs trajets
+                                                <i class="fas fa-arrow-down ms-3"></i>
+                                            </a>
+                                        </div>
+                                        <div class="collapse mt-2" id="collapse-{{ loop.index }}">
+                                            <div class="card card-body">
+                                                {% include "permutsearch/_tripSummary2.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-3"></i>Vous n'avez pas encore like d'utilisateur
+                    </div>
+                {% endif %}
+                <h3 class="h2 text-center text-primary mb-3 mt-5">Personnes qui vous ont Like</h3>
+                {% if regUsersData2 %}
+                    {% for reguser in regUsersData2 %}
+                        {% if reguser.registeredUser.user.isVisible == true %}
+                            <div class="permut-card mb-2">
+                                <input type="hidden" id="reguser-data-{{ loop.index }}" value="{{ reguser.userHome.0 ~ '/' ~ reguser.userHome.1 ~ '/' ~ reguser.userWork.0 ~ '/' ~ reguser.userWork.1 }}">
+                                <div class="permut-header mb-lg-3 mb-1 d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between">
+                                    <div class="d-flex flex-row align-items-center text-white">
+                                        <img class="rounded-circle me-4" src="{{ reguser.registeredUser.user.avatar ? vich_uploader_asset(reguser.registeredUser.user, 'avatarFile')|src : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }}" alt="avatar-user">
+                                        <div class="title-card">
+                                            <div class="d-flex flex-row justify-content-between">
+                                                <div class="d-flex flex-row">
+                                                    <h3 class="h2 mb-1 text-warning">{{ reguser.registeredUser.user.username }}</h3>
+                                                    {% if reguser.registeredUser.subscription is defined and reguser.registeredUser.subscription is not null %}
+                                                        <i class="fas fa-crown ms-2"></i>
+                                                    {% endif %}
+                                                </div>
+                                                {% if app.user.registeredUser.subscription %}
+                                                    <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
+                                                        <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-sm ms-3"></i>
+                                                    </a>
+                                                {% endif %}
+                                            </div>
+                                            <div class="text-info time-gained time-sm me-4">
+                                                <i class="fas fa-bolt"></i>
+                                                {{ reguser.timeGained }}
+                                                min
+                                            </div>
+                                            <h4 class="h3 text-wrap mb-2">
+                                                {% if reguser.registeredUser.rome is defined %}
+                                                    {{ reguser.registeredUser.rome.name }}
+                                                {% else %}
+                                                    Secteur d'activité non renseigné
+                                                {% endif %}
+                                            </h4>
+                                            <div class="d-flex flex-md-row flex-column pt-1">
+                                                <h5 class="mb-md-0 mb-1 me-md-3 me-0">
+                                                    <i class="fas fa-briefcase me-1 text-info"></i>
+                                                    {{ reguser.registeredUser.city ?? "Lieu de domicile non renseignée" }}
+                                                </h5>
+                                                <h5 class="mb-0">
+                                                    <i class="fas fa-home me-1 text-info"></i>
+                                                    {{ reguser.registeredUser.cityJob ?? "Lieu de travail non renseignée" }}
+                                                </h5>
+                                            </div>
+                                            <div class="d-flex flex-md-row flex-column mt-4">
+                                                <a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-sm me-md-2 me-0 mb-3 mb-md-0">Voir plus</a>
+                                                <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-sm">Voir le profil</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-md-row flex-column align-items-md-center mt-md-0 mt-4">
+                                        <div class="text-info time-gained time-md me-4">
+                                            <i class="fas fa-bolt"></i>
+                                            {{ reguser.timeGained }}
+                                            min
+                                        </div>
+                                        <a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-lg mb-md-0 mb-2">Voir plus</a>
+                                        <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-lg ms-md-3 mb-2 mb-md-0 ms-0">Voir le profil</a>
+                                        {% if app.user.registeredUser.subscription %}
+                                            <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
+                                                <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="collapse permut-body row row-cols-1 row-cols-md-2 mb-4" id="collapse-main-{{ loop.index }}">
+                                    <div class="map col pe-lg-3 ps-lg-2 p-md-1 p-3">
+                                        <div id="map-before-{{ loop.index }}" class="permutMap map-before shadow"></div>
+                                        <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="text-danger trajet">
+                                                <i class="fas fa-times-circle me-2"></i>
+                                                Vos trajets actuels
+                                                <i class="fas fa-arrow-down ms-3"></i>
+                                            </a>
+                                        </div>
+                                        <div class="collapse mt-2" id="collapse-{{ loop.index }}">
+                                            <div class="card card-body bg-dark text-white">
+                                                {% include "permutsearch/_tripSummary1.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="map col pe-lg-3 ps-lg-2 p-md-1 p-3">
+                                        <div id="map-after-{{ loop.index }}" class="permutMap map-after shadow"></div>
+                                        <div class="title-courses bg-white p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                            <a class="text-success trajet">
+                                                <i class="fas fa-check-circle me-2"></i>
+                                                Vos futurs trajets
+                                                <i class="fas fa-arrow-down ms-3"></i>
+                                            </a>
+                                        </div>
+                                        <div class="collapse mt-2" id="collapse-{{ loop.index }}">
+                                            <div class="card card-body">
+                                                {% include "permutsearch/_tripSummary2.html.twig" %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-3"></i>Aucun utilisateur ne vous a like
+                    </div>
+                {% endif %}
+            </div>
+        {% else %}
+            <div class="text-center">
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-3"></i>Vous devez être un
+                    <span class="fw-bold">utilisateur premium</span>
+                    pour accéder à cette page.</div>
+                <a href="{{ path('subscription_new') }}" class="btn btn-warning mx-auto">
+                    <i class="fas fa-crown me-1"></i>
+                    Devenir premium</a>
+            </div>
+        {% endif %}
+    </main>
+    <div class="modal fade" id="matchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Vous avez match !</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Vous avez match avec un autre utilisateur, l'équipe Jobpermut prendra contact avec vous pour la suite des démarches !
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cool !</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

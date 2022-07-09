@@ -1,0 +1,16 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        curriculum:
+            uri_prefix: /uploads/curriculums
+            upload_destination: '%kernel.project_dir%/public/uploads/curriculums'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        job_description:
+            uri_prefix: /uploads/job_descriptions
+            upload_destination: '%kernel.project_dir%/public/uploads/job_descriptions'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+        avatar:
+            uri_prefix: /uploads/avatars
+            upload_destination: '%kernel.project_dir%/public/uploads/avatars'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

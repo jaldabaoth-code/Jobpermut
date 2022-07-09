@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+    <main class="p-5 edit-profile">
+        <h1 class="h1 text-center text-dark">Compte Premium</h1>
+        <h2 class="h3 text-center text-dark">Ajoutez et mettez à jour vos informations personnelles en y apportant plus de précisions</h2>
+    </main>
+    {{ form_start(form) }}
+    <div class="form-row d-flex flex-md-row flex-column justify-content-around mt-2">
+        <div class="col-md-3 col-12">
+            {{ form_label(form.curriculumFile, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.curriculumFile, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-md-3 col-12">
+            {{ form_label(form.jobDescriptionFile, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.jobDescriptionFile, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-row d-flex flex-md-row flex-column justify-content-around mt-2">
+        <div class="col-md-3 col-12">
+            {{ form_label(form.ogrCode, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.ogrCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-md-3 col-12">
+            {{ form_label(form.companyCode, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.companyCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    {{ form_widget(form) }}
+    <button class="btn btn-primary mt-5 mb-3 col-10 offset-1">{{ edit ?? 'Enregistrer' }}</button>
+    {{ form_end(form) }}
+{% endblock %}

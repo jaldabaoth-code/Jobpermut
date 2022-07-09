@@ -1,0 +1,81 @@
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
+
+body {
+    background-color: $light;
+    color: $dark;
+    font-family: $font-p;
+}
+
+h1,
+h2 {
+    font-family: $title-font;
+}
+
+h3 {
+    font-family: $font-size-p;
+    font-weight: 300;
+}
+
+p {
+    font-size: $font-size-p;
+}
+
+.btn {
+    box-sizing: border-box;
+    appearance: none;
+    border-radius: 0.6em;
+    line-height: 1;
+    padding: 0.8em 1.8em;
+    font-family: $title-font;
+    background: {
+        position: 100%;
+        size: 400%;
+    }
+    transition: background 0.5s ease-in-out;
+
+    &:hover {
+        background-position: 0;
+    }
+}
+
+.btn-primary {
+    border: 2px solid $light;
+    color: $light;
+    border-color: $light;
+    background: {
+        image: linear-gradient(45deg, $light 50%, transparent 50%);
+    }
+
+    &:hover {
+        color: $primary;
+    }
+}
+
+.btn-warning {
+    border: 2px solid $light;
+    color: $dark;
+    border-color: $light;
+    background: {
+        image: linear-gradient(45deg, $dark 50%, transparent 50%);
+    }
+
+    &:hover {
+        color: $warning;
+    }
+}
+
+.btn-light {
+    border: 2px solid $light;
+    color: $dark;
+    border-color: $light;
+    background: {
+        image: linear-gradient(45deg, $dark 50%, transparent 50%);
+    }
+
+    &:hover {
+        color: $warning;
+        border-color: $dark;
+    }
+}
+

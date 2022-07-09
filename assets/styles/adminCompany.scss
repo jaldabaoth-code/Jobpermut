@@ -1,0 +1,58 @@
+@import 'variables.scss';
+@import 'app.scss';
+
+.company {
+    h2 {
+        color: $dark;
+    }
+
+    h3 {
+        color: $dark;
+    }
+
+    .company-container {
+        .company-card {
+            background-color: $dark;
+            border-radius: 30px;
+            $font-weight: 300;
+            $img-width: 75px;
+            $p-font-size: 22px;
+
+            p {
+                color: $white;
+                font-family: $font-p;
+                font-weight: $font-weight;
+                font-size: $p-font-size;
+
+                @media screen and (max-width: 768px) {
+                    font-size: $p-font-size/1.5;
+                }
+            }
+
+            .company-header {
+                color: $white;
+
+                img {
+                    object-fit: cover;
+                    width: $img-width;
+                    height: $img-width;
+                    @media screen and (max-width: 768px) {
+                        width: $img-width/1.5;
+                        height: $img-width/1.5;
+                    }
+                }
+
+                .company-titles {
+                    h4 {
+                        font-family: $title-font;
+                    }
+
+                    h5 {
+                        font-family: $font-p;
+                        font-weight: $font-weight;
+                    }
+                }
+            }
+        }
+    }
+}

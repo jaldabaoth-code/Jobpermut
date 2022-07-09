@@ -1,0 +1,22 @@
+@font-face {
+    font-family: 'Croogla';
+    src: url('../fonts/Croogla4F.ttf');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+}
+
+$primary: #00636f;
+$secondary: #b4b4b4;
+$success: #3fc254;
+$danger: #df4747;
+$warning: #ed9f1a;
+$info: #79dcfa;
+$light: #e2e2e2;
+$dark: #1b2630;
+$white: #f3efef;
+
+$badge_color: $danger;
+
+$font-size-p: 1em;
+
+$title-font: 'Croogla';
+$font-p: 'Roboto', sans-serif;

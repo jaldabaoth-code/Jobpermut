@@ -1,0 +1,21 @@
+{% extends "layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    - Accès refusé
+{% endblock %}
+
+{% block body %}
+    <main class="p-md-5 p-4">
+        <div class="p-md-5 pd-3">
+            <h1 class="h1 text-danger">Erreur 403 - Accès refusé</h1>
+            <h2 class="h3">Vous ne disposez pas des droits nécessaires afin d'accéder à cette page</h2>
+            <a href="/" class="btn btn-primary btn-lg mt-3">Retourner à l'accueil</a>
+        </div>
+    </main>
+{% endblock %}

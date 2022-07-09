@@ -1,0 +1,31 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+
+<div class="form row m-0 container p-lg-5 p-0 mt-3 mt-lg-0">
+    <div class="col-12 mt-2">
+        {{ form_label(form.username, null, {label: 'Nom d\'utilisateur'}) }}
+		{{ form_widget(form.username, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+	</div>
+	<div class="col-12 mt-2">
+		{{ form_label(form.email, null, {label: 'Email'}) }}
+		{{ form_widget(form.email, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+	</div>
+	<div class="col-12 mt-2">
+		{{ form_label(form.avatarFile) }}
+		{{ form_widget(form.avatarFile, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+	</div>
+	<div class="col-12 mt-2">
+		<a class="fw-light text-primary" href="{{ path('change_password', {username: app.user.username}) }}">Modifiez votre mot de passe</a>
+	</div>
+	<div class="col-12 mt-4 form-check form-switch">
+		{{ form_label(form.isVisible, {label: 'Profil visible'}) }}
+		{{ form_widget(form.isVisible, {'attr': {'class': 'form-check-input me-2'}}) }}
+	</div>
+
+	<div class="col-12 mt-4 d-flex justify-content-end flex-column align-items-center">
+		<input class="btn btn-primary" type="submit" value="Enregistrer mes informations">
+	</div>
+</div>
+
+{{ form_end(form) }}

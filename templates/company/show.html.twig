@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Entreprise
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admincompany') }}
+{% endblock %}
+
+{% block body %}
+    <div class="page-title">
+        <h1 class="h1 text-center py-1">Profil d'entreprise</h1>
+    </div>
+    <div class="company">
+        <div class="d-flex flex-direction-row company-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
+            <div class="col company-card p-4 p-sm-5 mx-3">
+                <div class="company-header d-flex flex-direction-row align-items-center mb-4">
+                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                    <div class="ms-3 mb-1 company-titles">
+                        <h4 class="m-0 text-warning">{{ company.name }}</h4>
+                        <h5 class="m-0">
+                            {{ company.address }}
+                        </h5>
+                        <p class="m-0">Code :
+                            {{ company.code }}</p>
+                        <p class="m-0">Id :
+                            {{ company.id }}</p>
+                    </div>
+                </div>
+                <a href="{{ path('company_index') }}" class="btn btn-primary m-2">Retour à la liste</a>
+                {{ include('company/_delete_form.html.twig') }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

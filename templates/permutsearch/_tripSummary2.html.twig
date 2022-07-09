@@ -1,0 +1,21 @@
+<div class="visitorForm d-flex flex-column justify-content-center col-12 p-4">
+	{% if reguser.tripSummary2.duration.hours %}
+		{% set hours = reguser.tripSummary2.duration.hours ~ ' heure(s)' %}
+	{% else %}
+		{% set hours = '' %}
+	{% endif %}
+	<h4 class="text-center h1 mb-4 text-success">Evaluation de votre futur trajet</h4>
+	<h5 class="h3 fw-bold text-center text-dark mb-3">
+		<i class="fas fa-car"></i>
+		{{ reguser.tripSummary2.distance }}
+		kilomètres
+		<span class="text-dark">par jour</span>
+	</h5>
+	<h5 class="text-center fw-bold h1 mb-4 text-dark">
+		<i class="fas fa-stopwatch"></i>
+		{{ hours }}
+		{{ reguser.tripSummary2.duration.minutes }}
+		minutes
+		<span class="text-dark">par jour</span>
+	</h5>
+</div>

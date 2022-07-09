@@ -1,0 +1,22 @@
+{% extends "layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    - Site indisponible
+{% endblock %}
+
+{% block body %}
+    <main class="p-md-5 p-4">
+        <div class="p-md-5 pd-3">
+            <h1 class="h1 text-danger">Erreur 500 - Page indisponible</h1>
+            <h2 class="h3">Cette page est actuellement indisponible. Merci de réessayer ultérieurement.</h2>
+            <p>Si le problème persiste, merci de contacter l'administrateur du site <a href="mailto:mario@jobpermut.fr">mario@jobpermut.fr</a></p>
+            <a href="/" class="btn btn-primary btn-lg mt-3">Retourner à l'accueil</a>
+        </div>
+    </main>
+{% endblock %}

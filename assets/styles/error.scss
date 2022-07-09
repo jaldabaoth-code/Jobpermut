@@ -1,0 +1,15 @@
+@import 'variables';
+@import 'app';
+
+main {
+    height: 50vh;
+
+    @media screen and (max-width: 768px) {
+        height: 30vh;
+    }
+
+    h2 {
+        font-weight: 300;
+        font-family: $font-p;
+    }
+}

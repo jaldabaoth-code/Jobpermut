@@ -1,0 +1,40 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('testimony') }}
+{% endblock %}
+
+{% block title %}Gestion commentaires
+{% endblock %}
+
+{% block body %}
+    <div class="page-title">
+        <h1 class="h1 text-center py-1">Commentaires</h1>
+    </div>
+    <div class="testimony">
+    <div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
+        <div class="col testimony-card p-4 p-sm-5 mx-3">
+            <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+                <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                <div class="ms-3 mb-1 testimony-titles">
+                    <h4 class="m-0 text-warning">{{ testimony.user.username }}</h4>
+                    <h5 class="m-0">
+                        {% if testimony.user.registeredUser.rome is defined %}
+                            {{ testimony.user.registeredUser.rome.name }}
+                        {% else %}
+                            Pas d'emploi renseigné
+                        {% endif %}
+                    </h5>
+                    <p class="m-0">ID :
+                        {{ testimony.id }}</p>
+                    <p class="m-0">
+                        {{ testimony.createdAt ? testimony.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+                </div>
+            </div>
+            <p class="mb-1">{{ testimony.commentary }}</p>
+            <a href="{{ path('testimony_index') }}" class="btn btn-primary m-2">Retour à la liste</a>
+            {{ include('testimony/_delete_form.html.twig') }}
+        </div>
+    </div>
+    </div>
+{% endblock %}

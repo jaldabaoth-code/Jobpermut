@@ -1,0 +1,281 @@
+@import 'variables.scss';
+@import 'app.scss';
+@import '~leaflet/dist/leaflet.css';
+
+header {
+    .main-header {
+        background: no-repeat fixed center/100% url('../images/check.jpg');
+        object-fit: cover;
+        height: 60vh;
+
+        .text-header {
+
+            .h1 {
+                font-size: 7em;
+                text-shadow: 4px 4px 2px rgba(0,0,0,0.6);
+                @media screen and (max-width: 768px) {
+                    font-size: 4em;
+                }
+            }
+
+            .h2 {
+                font-family: $font-p;
+                text-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+            }
+        }
+
+        .btn-warning {
+            border: 2px solid $warning;
+            color: $dark;
+            border-color: $warning;
+            background: {
+                image: linear-gradient(45deg, $dark 50%, transparent 50%);
+            }
+
+            &:hover {
+                color: $warning;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            background: no-repeat fixed center/300% url('../images/check.jpg');
+        }
+    }
+
+    .banner-icons {
+        background-color: $dark;
+        color: $light;
+
+        .card-banner {
+            $width: 300px;
+            width: $width;
+
+            .title-icons {
+                $font-size: 1.1em;
+                font-family: $font-p;
+                font-weight: bold;
+                font-size: $font-size;
+            }
+
+            i {
+                $font-size: 3em;
+                font-size: $font-size;
+            }
+
+            .txt-banner {
+                $font-weight: 300;
+                font-weight: $font-weight;
+            }
+        }
+    }
+}
+
+.freeMap {
+
+    display: flex;
+
+    .visitorForm {
+        width: 30vw;
+        height: 120vh;
+    }
+
+    h3 {
+        font-family: $font-p;
+    }
+
+    p {
+        font-size: 20px;
+    }
+
+    #map {
+        width: 70vw;
+    }
+
+    .fas {
+        font-size: 20px;
+    }
+
+    .fa-home {
+        color: $warning;
+
+    }
+
+    .fa-briefcase {
+        color: $primary;
+    }
+
+    @media screen and (max-width: 768px) {
+        flex-direction: column;
+
+        .visitorForm {
+            width: 100%;
+        }
+    }
+}
+
+.testimony {
+    h2 {
+        color: $dark;
+    }
+
+    h3 {
+        color: $dark;
+    }
+
+    .testimony-container {
+        .testimony-card {
+            background-color: $dark;
+            border-radius: 30px;
+            $font-weight: 300;
+            $img-width: 50px;
+            $p-font-size: 16px;
+
+            p {
+                color: $white;
+                font-family: $font-p;
+                font-weight: $font-weight;
+                font-size: $p-font-size;
+            }
+
+            .testimony-header {
+                color: $white;
+
+                img {
+                    object-fit: cover;
+                    width: $img-width;
+                    height: $img-width;
+                }
+
+                .testimony-titles {
+                    h4 {
+                        font-family: $title-font;
+                        font-size: 20px;
+                    }
+
+                    h5 {
+                        font-family: $font-p;
+                        font-weight: $font-weight;
+                        font-size: 16px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.presentation-container {
+    $margin-bot: 1.5em;
+    background-color: $dark;
+    color: $secondary;
+    $font-weight: 300;
+    $font-size: 24px;
+
+    .page-subtitle {
+        margin-bottom: $margin-bot;
+        font-family: $font-p;
+        font-weight: $font-weight;
+    }
+
+    .list {
+        list-style: none;
+
+        .list-text {
+            margin-left: 1em;
+        }
+
+        .list-title {
+            font-family: $title-font;
+            font-size: $font-size;
+
+            @media screen and (max-width: 768px) {
+                font-size: 20px;
+            }
+
+            span {
+                color: $warning;
+            }
+        }
+
+        .list-subtitle {
+            font-family: $font-p;
+            font-weight: $font-weight;
+            font-size: 23px;
+
+            @media screen and (max-width: 768px) {
+                font-size: 15px;
+            }
+        }
+
+        .number {
+            $size: 45px;
+            $inline-spacing: 0;
+            $placement: center;
+
+            background-color: $warning;
+            width: $size;
+            height: $size;
+            border-radius: 90px;
+            border: 2px solid $warning;
+            color: $dark;
+            font-weight: bold;
+            font-size: 28px;
+            margin: 1em;
+            padding: $inline-spacing;
+            display: flex;
+            justify-content: $placement;
+            align-items: $placement;
+
+            @media screen and (max-width: 768px) {
+                font-size: $font-size/1.5;
+                width: $size/2;
+                height: $size/2;
+            }
+
+            p {
+                padding: $inline-spacing;
+                margin: $inline-spacing;
+                width: $size;
+                height: $size;
+                display: flex;
+                justify-content: $placement;
+                align-items: $placement;
+            }
+        }
+
+        .check {
+            $size: 45px;
+            $inline-spacing: 0;
+            $placement: center;
+
+            background-color: transparent;
+            width: $size;
+            height: $size;
+            border-radius: 90px;
+            border: 2px solid $warning;
+            color: $warning;
+            font-weight: bold;
+            font-size: 28px;
+            margin: 1em;
+            padding: $inline-spacing;
+            display: flex;
+            justify-content: $placement;
+            align-items: $placement;
+
+            @media screen and (max-width: 768px) {
+                font-size: $font-size/2;
+                width: $size/2;
+                height: $size/2;
+            }
+
+            p {
+                padding: $inline-spacing;
+                margin: $inline-spacing;
+                width: $size;
+                height: $size;
+                display: flex;
+                justify-content: $placement;
+                align-items: $placement;
+            }
+        }
+    }
+}

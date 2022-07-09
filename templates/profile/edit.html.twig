@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('profile') }}
+{% endblock %}
+
+{% block title %}
+	{{ parent() }}
+	- Editer mes informations
+{% endblock %}
+
+{% block body %}
+	<main class="p-5 edit-profile">
+		<h1 class="h1 text-center text-dark">Editer mes informations</h1>
+		<h2 class="h3 text-center text-dark">Ajoutez et mettez à jour vos informations personnelles afin de rendre votre profil visible</h2>
+
+		<div class="d-flex justify-content-center">
+			{{ include('profile/_form.html.twig') }}
+		</div>
+	</main>
+{% endblock %}

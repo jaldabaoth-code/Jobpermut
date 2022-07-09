@@ -1,0 +1,251 @@
+@import 'variables';
+@import '~leaflet/dist/leaflet.css';
+
+
+.heart{
+    text-decoration: none;
+}
+
+.ajax {
+    height: 40vh;
+}
+
+.permutsearch {
+    h2 {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .permut-card {
+        .permut-header {
+            background-color: $dark;
+            border-radius: 25px;
+            padding: 30px 40px;
+
+            @media screen and (max-width: 430px) {
+                padding: 30px 20px;
+            }
+
+            h3 {
+                font-size: 20px;
+                vertical-align: baseline;
+            }
+
+            .fa-crown {
+                font-size: 16px;
+                background: -webkit-linear-gradient(rgb(255, 230, 149), $warning);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            h4 {
+                font-size: 17px;
+                font-weight: 300;
+            }
+
+            h5 {
+                font-size: 15px;
+            }
+
+            img {
+                height: 70px;
+                width: 70px;
+                object-fit: cover;
+            }
+
+            .btn {
+                border-color: $warning;
+            }
+
+            .btn-outline-light {
+                border: 2px solid $light;
+                line-height: 1;
+                padding: 0.8em 1.8em;
+            }
+
+            .fa-heart {
+                font-size: 30px;
+                transition: 0.3s ease-in-out;
+                padding: 14px;
+                vertical-align: middle;
+
+                &:hover {
+                    font-weight: bold;
+                    background-color: rgba(255, 255, 255, 0.205);
+                    border-radius: 50%;
+                }
+            }
+
+            .heart-sm {
+                display: none;
+                font-size: 30px;
+                padding: 0;
+                margin: 0;
+
+                &:hover {
+                    font-weight: bold;
+                    background-color: $dark;
+                    border-radius: 0%;
+                }
+
+                @media screen and (max-width: 768px) {
+                    display: block;
+                }
+            }
+
+            .heart-md {
+                @media screen and (max-width: 768px) {
+                    display: none;
+                }
+            }
+
+            .time-sm {
+                display: none;
+                font-size: 14px;
+                margin-bottom: 8px;
+
+                @media screen and (max-width: 1024px) {
+                    display: block;
+                }
+            }
+
+            .time-md {
+                font-size: 18px;
+
+                @media screen and (max-width: 1024px) {
+                    display: none;
+                }
+            }
+
+            .btn-card-sm {
+                display: none;
+
+                @media screen and (max-width: 1024px) {
+                    display: block;
+                }
+            }
+
+            .btn-card-lg {
+                @media screen and (max-width: 1024px) {
+                    display: none;
+                }
+            }
+
+            .time-gained {
+                font-weight: bolder;
+                font-family: $font-p;
+            }
+        }
+
+        .permut-body {
+            .map {
+                .permutMap {
+                    width: 100%;
+                    height: 70vh;
+                    border-radius: 25px;
+                }
+
+                .trajet {
+                    font-size: 18px;
+                    font-family: $title-font;
+                    border-radius: 15px;
+                    text-decoration: none;
+                }
+
+                .title-courses {
+                    border-radius: 20px;
+
+                    .fa-times-circle,
+                    .fa-check-circle {
+                        font-size: 20px;
+                        display: inline-block;
+                    }
+
+                    .fa-arrow-down {
+                        display: none;
+                    }
+
+                    &[aria-expanded='false'] {
+                        .fa-arrow-down {
+                            display: inline-block;
+                        }
+
+                        -webkit-animation: action 1s infinite alternate;
+                        animation: action 1s infinite alternate;
+
+                        @-webkit-keyframes action {
+                            0% {
+                                transform: translateY(0);
+                            }
+
+                            100% {
+                                transform: translateY(-10px);
+                            }
+                        }
+
+                        @keyframes action {
+                            0% {
+                                transform: translateY(0);
+                            }
+
+                            100% {
+                                transform: translateY(-10px);
+                            }
+                        }
+                    }
+                }
+
+                .fas {
+                    font-size: 20px;
+                }
+
+                .fa-home {
+                    color: $warning;
+                }
+
+                .fa-briefcase {
+                    color: $warning;
+                }
+
+                .user {
+                    color: $primary;
+                }
+
+                .visitorForm {
+                    h4 {
+                        font-size: 1.9em;
+                        font-weight: 300;
+                    }
+
+                    h5 {
+                        i {
+                            font-size: 1em;
+                        }
+
+                        font-family: $font-p;
+                        font-weight: normal;
+                        font-size: 1.3em;
+
+                        span {
+                            font-weight: 300;
+                        }
+                    }
+                }
+            }
+
+            .collapse {
+                .card {
+                    border-radius: 20px;
+                    border: $light;
+                }
+            }
+
+            .collapsing {
+                .card {
+                    border-radius: 20px;
+                    border: $light;
+                }
+            }
+        }
+    }
+}

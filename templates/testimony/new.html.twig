@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('testimony') }}
+{% endblock %}
+
+{% block title %}Nouveau commentaire
+{% endblock %}
+
+{% block body %}
+    <div class="container py-5">
+        <h1 class="text-center m-2">Créer un nouveau commentaire</h1>
+        {{ include('testimony/_form.html.twig') }}
+        <a href="{{ path('testimony_index') }}" class="btn btn-primary w-100">Retour à la liste</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+
+{% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    <div class="d-flex justify-content-center container col-md-6 mt-4">
+        <div class="row w-100">
+
+            {% for flash_error in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+            {% endfor %}
+
+            <h2 class="h2">Inscription</h2>
+            {{ form_start(registrationForm) }}
+                {{ form_label(registrationForm.username, null,
+                    {label: 'Veuillez choisir un pseudonyme', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.username,
+                    {'attr': {'placeholder': 'Votre pseudonyme', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                {{ form_label(registrationForm.email, null,
+                    {label: 'Veuillez saisir votre adresse email', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.email,
+                    {'attr': {'placeholder': 'exemple@mail.com', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                {{ form_label(registrationForm.plainPassword.first, null,
+                    {label: 'Veuillez saisir votre Mot de passe', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.plainPassword.first,
+                    {'attr': {'placeholder': 'Votre mot de passe', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                {{ form_label(registrationForm.plainPassword.second, null,
+                    {label: 'Veuillez répéter votre Mot de passe', 'label_attr': {'class': 'h6'}}) }}
+                {{ form_widget(registrationForm.plainPassword.second,
+                    {'attr': {'placeholder': 'Répéter votre mot de passe', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
+
+                <button type="submit" class="btn btn-lg btn-primary col-12 mb-5">Créer votre compte</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}

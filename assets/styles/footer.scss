@@ -1,0 +1,51 @@
+@import 'variables';
+
+footer {
+    font-family: $font-p;
+    font-size: $font-size-p;
+    $fab-width: 36px;
+    $fab-padding: 10px;
+    $fab-border-radius: 50%;
+    $fab-hover-opacity: .7;
+    $fab-hover-transition-duration: .7s;
+    $font-weight: 300;
+
+    .logo-footer {
+        width: 300px;
+    }
+
+    a {
+        text-decoration: none;
+        color: $primary;
+        font-weight: $font-weight;
+        transition: ease-in-out .4s;
+
+        &:hover {
+            color: $dark;
+        }
+    }
+
+    .fab {
+        color: white;
+        background-color: $warning;
+        width: $fab-width;
+        border-radius: $fab-border-radius;
+        padding: $fab-padding;
+
+        &:hover {
+            opacity: $fab-hover-opacity;
+            transition-duration: $fab-hover-transition-duration;
+        }
+    }
+
+    .title {
+        font-family: $title-font;
+        color: $primary;
+        font-size: $font-size-p * 1.5;
+    }
+
+    .paragraph {
+        font-weight: $font-weight;
+        color: $primary;
+    }
+}

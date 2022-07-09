@@ -1,0 +1,78 @@
+@import 'variables';
+
+$height: 80vh;
+$width: 100vw;
+$spacing: 3vh;
+
+body {
+    height: 100vh;
+
+    a {
+        text-decoration: none;
+    }
+
+    .page-title {
+        margin: $spacing;
+        $font-weight-light: 300;
+        $font-size-title: 4rem;
+
+        h1 {
+            color: $primary;
+            font-size: $font-size-title;
+
+            @media screen and (max-width: 590px) {
+                font-size: 3em;
+            }
+        }
+
+        .h3 {
+            font-family: $font-p;
+            font-size: $font-size-title/2.5;
+        }
+    }
+
+    .admin-container {
+        .card-row {
+            margin-bottom: $spacing;
+
+            .card {
+                background-color: $primary;
+                border-radius: 30px;
+                margin-top: $spacing;
+
+                .card-body {
+                    height: 35vh;
+                }
+
+                .logoAdmin {
+                    font-size: 10vh;
+                    padding: $spacing;
+                    color: $secondary;
+                }
+
+                .description {
+                    color: $secondary;
+                }
+
+                .btn-admin {
+                    border: 2px solid $light;
+                    color: $primary;
+                    background-color: $light;
+                    border-color: $light;
+                    background: {
+                        image: linear-gradient(
+                            45deg,
+                            $primary 50%,
+                            transparent 50%
+                        );
+                    }
+
+                    &:hover {
+                        color: $light;
+                        border-color: $secondary;
+                    }
+                }
+            }
+        }
+    }
+}

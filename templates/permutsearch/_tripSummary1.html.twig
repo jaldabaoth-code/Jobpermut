@@ -1,0 +1,21 @@
+<div class="visitorForm d-flex flex-column justify-content-center col-12 p-4">
+	{% if userData.tripSummary1.duration.hours %}
+		{% set hours = userData.tripSummary1.duration.hours ~ ' heure(s)' %}
+	{% else %}
+		{% set hours = '' %}
+	{% endif %}
+	<h4 class="text-center h1 mb-4 text-danger">Evaluation de votre trajet actuel</h4>
+	<h5 class="h3 text-center fw-bold text-white mb-3">
+		<i class="fas fa-car"></i>
+		{{ userData.tripSummary1.distance }}
+		kilomètres
+		<span class="text-white">par jour</span>
+	</h5>
+	<h5 class="text-center h1 fw-bold mb-4 text-white">
+		<i class="fas fa-stopwatch"></i>
+		{{ hours }}
+		{{ userData.tripSummary1.duration.minutes }}
+		minutes
+		<span class="text-white">par jour</span>
+	</h5>
+</div>

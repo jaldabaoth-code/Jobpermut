@@ -1,0 +1,87 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+
+<div class="form row m-0 container p-lg-5 p-0 mt-3 mt-lg-0">
+    <div class="col-12">
+        <div class="form-row d-flex flex-md-row flex-column justify-content-around mt-2">
+            <div class="col-md-6 col-12">
+                {{ form_label(form.firstname, null, {label: 'Prénom'}) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+            <div class="col-md-6 col-12">
+                {{ form_label(form.lastname, null, {label: 'Nom'}) }}
+                {{ form_widget(form.lastname, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-2">
+        {{ form_label(form.phone, null, {label: 'Téléphone'}) }}
+        <span class="fst-italic fw-light">(facultatif)</span>
+        {{ form_widget(form.phone, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+    </div>
+    <div class="col-12 mt-2">
+        {{ form_label(form.rome, null, {label: 'Intitulé du poste'}) }}
+        {% if app.request.query.get('premium') %}
+            {{ form_widget(form.rome, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}, required: true}) }}
+        {% else %}
+            {{ form_widget(form.rome, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+        {% endif %}
+    </div>
+
+    <h2 class="h4 mt-4 text-primary">Adresse de votre domicile</h2>
+    <div class="col-12">
+        <div class="form-row d-flex flex-lg-row flex-column justify-content-around mt-2">
+            <div class="col-lg-2 col-12">
+                {{ form_label(form.streetNumber, null, {label: 'Numéro de voie'}) }}
+                {{ form_widget(form.streetNumber, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+            <div class="col-lg-10 col-12">
+                {{ form_label(form.street, null, {label: 'Nom de la rue'}) }}
+                {{ form_widget(form.street, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-row d-flex flex-lg-row flex-column justify-content-around mt-2">
+            <div class="col-lg-9 col-12">
+                {{ form_label(form.city, null, {label: 'Ville'}) }}
+                {{ form_widget(form.city, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+            <div class="col-lg-3 col-12">
+                {{ form_label(form.zipcode, null, {label: 'Code postal'}) }}
+                {{ form_widget(form.zipcode, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+        </div>
+    </div>
+    <h2 class="h4 mt-4 text-primary">Adresse de votre travail</h2>
+    <div class="col-12">
+        <div class="form-row d-flex flex-lg-row flex-column justify-content-around mt-2">
+            <div class="col-lg-2 col-12">
+                {{ form_label(form.jobStreetNumber, null, {label: 'Numéro de voie'}) }}
+                {{ form_widget(form.jobStreetNumber, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+            <div class="col-lg-10 col-12">
+                {{ form_label(form.jobStreet, null, {label: 'Nom de la rue'}) }}
+                {{ form_widget(form.jobStreet, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-row d-flex flex-lg-row flex-column justify-content-around mt-2">
+            <div class="col-lg-9 col-12">
+                {{ form_label(form.cityJob, null, {label: 'Ville'}) }}
+                {{ form_widget(form.cityJob, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+            <div class="col-lg-3 col-12">
+                {{ form_label(form.jobZipcode, null, {label: 'Code postal'}) }}
+                {{ form_widget(form.jobZipcode, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="col-12 mt-4 d-flex justify-content-end flex-column align-items-center">
+        <input class="btn btn-primary" type="submit" value="{{ app.request.query.get('premium') ? 'Enregistrer et passer premium' : 'Enregistrer mes informations' }}">
+    </div>
+</div>
+
+{{ form_end(form) }}

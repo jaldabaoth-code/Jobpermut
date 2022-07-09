@@ -1,0 +1,165 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{% block title %}
+	{{ parent() }}
+	- Accueil
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('freeMap') }}
+{% endblock %}
+
+{% block body %}
+	<header id="home">
+		<div class="main-header d-flex flex-column align-items-center justify-content-center my-auto">
+			<div class="p-md-5 p-3 text-center">
+				<div class="text-header p-md-5 p-0 mb-5 d-flex flex-column justify-content-center text-center">
+					<h1 class="h1 text-warning">
+						<span class="text-white">Job</span>permut</h1>
+					<h2 class="h2 text-uppercase text-white">échangez votre travail</h2>
+				</div>
+				<a class="btn btn-lg btn-warning" href="#presentation">Découvrir Jobpermut</a>
+			</div>
+		</div>
+		<div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-car mb-3"></i>
+				<p class="title-icons">16,7 Millions de Navetteurs*</p>
+				<p class="mb-0 txt-banner">*Un navetteur est un travailleur qui quitte chaque jour sa ville de domicile pour se rendre à son travail</p>
+			</div>
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-stopwatch mb-3"></i>
+				<p class="title-icons">64 mn / jour</p>
+				<p class="mb-0 txt-banner">Temps moyen Aller/Retour Domicile/Travail</p>
+			</div>
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-map-marked-alt mb-3"></i>
+				<p class="title-icons">3/4 Français</p>
+				<p class="mb-0 txt-banner">Prêts à changer de travail pour se rapprocher de leur domicile</p>
+			</div>
+		</div>
+
+	</header>
+
+	<section class="freeMap">
+		{% if app.request.get('tripSummary') is null %}
+			{{ include('includes/_visitor_form.html.twig') }}
+		{% else %}
+			{{ include('includes/_tripSummary.html.twig') }}
+		{% endif %}
+
+		<div id="map"></div>
+		<div class="TripEvaluation"></div>
+	</section>
+
+	<section id="presentation">
+		<div class="container-fluid presentation-container">
+			<div class="row">
+				<div class="text-center">
+					<h2 class="h1 page-title mt-5">
+						Jobpermut c'est quoi ?
+					</h2>
+					<h3 class="h3">
+						Comment ça marche ?
+					</h3>
+				</div>
+			</div>
+			<div class="row mt-lg-2 mt-0 mb-lg-0 mb-4 pb-1 pb-lg-3 row g-4 px-lg-5 px-3">
+				<div class="d-flex justify-content-center">
+					<ol data-aos="fade-right" data-aos-delay="100" class="p-0">
+						<li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+							<div class="mx-md-3 mx-1 number">
+								<p>1</p>
+							</div>
+							<div class="list-text">
+								<div class="h1 m-0 list-title">Je teste mon trajet domicile-travail</div>
+								<div class="h3 m-0 text-muted list-subtitle">Quel temps et combien de kms par an</div>
+							</div>
+						</li>
+						<li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+							<div class="mx-md-3 mx-1 number">
+								<p>2</p>
+							</div>
+							<div class="list-text">
+								<div class="h1 m-0 list-title">Jobpermut me propose des binômes avec qui permuter</div>
+								<div class="h3 m-0 text-muted list-subtitle">Des navetteurs qui exercent le même métier que moi</div>
+							</div>
+						</li>
+						<li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+							<div class="mx-md-3 mx-1 number">
+								<p>3</p>
+							</div>
+							<div class="list-text">
+								<div class="h1 m-0 list-title">Je sélectionne les binômes qui m’intéressent</div>
+								<div class="h3 m-0 text-muted list-subtitle">Réduction de mon trajet domicile-travail, temps et kms</div>
+							</div>
+						</li>
+
+						<li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+							<div class="mx-md-3 mx-1 number">
+								<p>4</p>
+							</div>
+							<div class="list-text">
+								<div class="h1 m-0 list-title">Je rentre en contact avec les binômes dont l’intérêt est réciproque</div>
+								<div class="h3 m-0 text-muted list-subtitle">Pas de partage de données si l’intérêt n’est pas commun</div>
+							</div>
+						</li>
+						<li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+							<div class="mx-md-3 mx-1 number">
+								<p>5</p>
+							</div>
+							<div class="list-text">
+								<div class="h1 m-0 list-title">Si tout matche, Jobpermut vous accompagne pour permuter</div>
+								<div class="h3 m-0 text-muted list-subtitle">Accompagnement RH auprès de votre binôme et de votre employeur</div>
+							</div>
+						</li>
+						<li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+							<div class="mx-md-3 mx-1 check">
+								<p>
+									<i class="fas fa-check"></i>
+								</p>
+							</div>
+							<div class="list-text">
+								<div class="h1 m-0 list-title">Je
+									<span>permut</span>
+									!</div>
+								<div class="h3 m-0 text-muted list-subtitle">Et réalise de belles économies de temps et d'argent !</div>
+							</div>
+						</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="testimony d-flex flex-column justify-content-center container py-md-5 py-3" id="testimony">
+		<h2 class="h1 text-center mt-0">Témoignages</h2>
+		<h3 class="h3 text-center">Ils ont essayé Jobpermut et ils ont aimé !</h3>
+
+		<div class="d-flex testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-2 px-lg-5">
+			{% for testimony in testimonies|slice(0, 3) %}
+				<div data-aos="fade-up" data-aos-delay="{{ loop.index }}00" class="col testimony-card p-5 mx-1">
+					<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+						<img class="rounded-circle" src="{{ testimony.user.avatar ? vich_uploader_asset(testimony.user, 'avatarFile')|src : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }}" alt="avatar-user">
+						<div class="ms-3 mb-1 testimony-titles">
+							<h4 class="m-0 text-warning">{{ testimony.user.username }}</h4>
+							<h5 class="m-0">{{ testimony.createdAt|date('d/m/Y') }}</h5>
+						</div>
+					</div>
+					<p class="m-0">{{ testimony.commentary }}</p>
+				</div>
+			{% endfor %}
+		</div>
+		{% if not is_granted('ROLE_USER') %}
+			<a href="#" class="btn btn-lg btn-warning mx-auto enter-site">Faites comme eux !</a>
+		{% else %}
+			<a href="{{ path('permutsearch') }}" class="btn btn-lg btn-warning mx-auto">Permutez !</a>
+		{% endif %}
+	</section>
+{% endblock %}

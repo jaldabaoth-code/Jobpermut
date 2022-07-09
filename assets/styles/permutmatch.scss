@@ -1,0 +1,50 @@
+@import 'variables';
+
+.permutmatch {
+    h2 {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .permut-card {
+        background-color: $dark;
+        border-radius: 25px;
+        padding: 30px 40px;
+
+        @media screen and (max-width: 430px) {
+            padding: 25px 15px;
+        }
+
+        h3 {
+            font-size: 20px;
+        }
+
+        h4 {
+            font-size: 17px;
+            font-weight: 300;
+        }
+
+        h5 {
+            font-size: 15px;
+        }
+
+        img {
+            height: 70px;
+            width: 70px;
+            object-fit: cover;
+        }
+
+        .btn {
+            border-color: $warning;
+
+            @media screen and (max-width: 768px) {
+                width: 50%;
+                margin-top: 24px;
+            }
+
+            @media screen and (max-width: 430px) {
+                width: 100%;
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{% extends "layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    - Page non trouvée
+{% endblock %}
+
+{% block body %}
+    <main class="p-md-5 p-4">
+        <div class="p-md-5 pd-3">
+            <h1 class="h1 text-danger">Erreur 404 - Page non trouvée</h1>
+            <h2 class="h3">La page que vous essayez d'atteindre n'existe pas.</h2>
+            <a href="/" class="btn btn-primary btn-lg mt-3">Retourner à l'accueil</a>
+        </div>
+    </main>
+{% endblock %}

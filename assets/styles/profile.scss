@@ -1,0 +1,136 @@
+@import 'variables';
+@import 'app';
+@import '~leaflet/dist/leaflet.css';
+
+.profile {
+    $font-weight-light: 300;
+    $font-size: 1em;
+
+    border-radius: 30px;
+    color: $white;
+
+    .profile-header {
+        img {
+            $size: 75px;
+
+            height: $size;
+            object-fit: cover;
+            width: $size;
+        }
+
+        i {
+            font-size: 2.5em;
+        }
+
+        .fa-heart {
+            font-size: 40px;
+            transition: 0.3s ease-in-out;
+            padding: 14px;
+            vertical-align: middle;
+
+            &:hover {
+                font-weight: bold;
+                background-color: rgba(255, 255, 255, 0.205);
+                border-radius: 50%;
+            }
+        }
+
+        .profile-titles {
+            .h3 {
+                font-family: $font-p;
+                font-size: $font-size;
+                font-weight: $font-weight-light;
+                font-style: italic;
+            }
+
+            i {
+                font-size: 20px;
+                background: -webkit-linear-gradient(
+                    rgb(255, 230, 149),
+                    $warning
+                );
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+        }
+    }
+
+    .profile-body {
+        i {
+            color: $warning;
+            font-size: 1.2em;
+        }
+
+        p {
+            font-size: $font-size;
+            font-family: $font-p;
+            font-weight: 400;
+
+            span {
+                font-weight: $font-weight-light;
+                font-style: italic;
+                font-size: 1em;
+            }
+        }
+
+        .btn-light {
+            border: 2px solid $light;
+            color: $dark;
+            border-color: $light;
+            background: {
+                image: linear-gradient(45deg, $dark 50%, transparent 50%);
+            }
+
+            &:hover {
+                color: $light;
+                border-color: $light;
+            }
+        }
+
+        .btn-warning {
+            .fa-crown {
+                color: $dark;
+            }
+
+            &:hover {
+                .fa-crown {
+                    color: $warning;
+                }
+            }
+        }
+    }
+
+    #map {
+        height: 373px;
+        border-radius: 30px;
+    }
+
+    .fas {
+        font-size: 20px;
+    }
+
+    .fa-home {
+        color: $warning;
+    }
+
+    .fa-briefcase {
+        color: $primary;
+    }
+}
+
+.edit-profile {
+    h2 {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .btn {
+        width: 400px;
+        height: 60px;
+        font-size: 20px;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
+        }
+    }
+}
