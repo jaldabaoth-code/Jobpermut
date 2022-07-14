@@ -83,6 +83,6 @@ password: admin123456789
 
 ## The Links
 
-<a href="https://github.com/WildCodeSchool/orleans-202103-php-project-jobpermut/tree/master">Link to the repository of project where we worked during the <b>WCS Web Project 3</b></a>
+<a href="https://github.com/WildCodeSchool/orleans-202103-php-project-jobpermut/tree/master">Link to the repository of project where we worked during <b>WCS Web Project 3</b></a>
 
 <a href="http://jobpermut.fr/">Link to current website of <b>Jobpermut</b></a>
