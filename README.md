@@ -7,7 +7,10 @@
 
 ![Jobpermut](https://i.ibb.co/HNm1snS/logo-marque-horizontal-resized.png)
 
-## index
+## Jobpermut
+
+### index
+
 1. [Description](#Description)
 2. [Prerequisites](#Prerequisites)
 3. [Users](#Users)
@@ -15,13 +18,13 @@
 5. [Built-With](#Built-With)
 6. [Authors](#Authors)
 
-## Description
+### Description
 
 Jobpermut is a job exchange site. Unregistered users can simulate their commute time and users must register in order to access the service.
 Once registered and logged in, they can compare their home-work distance with the values of other users.
 If a route interests them, they can "match" in order to offer the job exchange. 
 
-## Prerequisites
+### Prerequisites
 
 * [PHP 7.4.*](https://www.php.net/releases/7_4_0.php) (check by running php -v in your console)
 * [Composer 2.*](https://getcomposer.org/) (check by running composer --version in your console)
@@ -34,7 +37,8 @@ If a route interests them, they can "match" in order to offer the job exchange.
 * WARNING : This app use [Pole emploi ROMEv1](https://pole-emploi.io/data/api/rome) API, you also need to get an API key from this service
 
 
-## Installation
+### Installation
+
 If you meet the prerequisites, you can proceed to the installation of the project 
 
 1. Clone the project from [Github](https://github.com/WildCodeSchool/orleans-202103-php-project-jobpermut/)
@@ -49,7 +53,9 @@ If you meet the prerequisites, you can proceed to the installation of the projec
 10. Run `yarn encore dev` to build assets
 11. Run `symfony server:start` to launch symfony server
 12. Go to localhost:8000 on your browser
-## Users
+
+### Users
+
 Demo User
 login: john@doe.com
 password: 123456789
@@ -61,7 +67,8 @@ password: admin123456789
 SuperAdmin User:
 login: wildjobexchangeSuperAdmin@gmail.com
 password: admin123456789
-## Built-With
+
+### Built-With
 
 * [Symfony](https://github.com/symfony/symfony)
 * [GrumPHP](https://github.com/phpro/grumphp)
@@ -71,7 +78,7 @@ password: admin123456789
 * [ESLint](https://eslint.org/)
 * [Sass-Lint](https://github.com/sasstools/sass-lint)
 
-## Authors
+### Authors
 
 * [Mael Chariault](https://github.com/bouboumael)
 * [Zurabi Grialat](https://github.com/jaldabaoth-code)
