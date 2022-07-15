@@ -36,7 +36,6 @@ If a route interests them, they can "match" in order to offer the job exchange.
 * WARNING : This app use [Open Route Service](https://openrouteservice.org/) API, you also need to get an API key from this service
 * WARNING : This app use [Pole emploi ROMEv1](https://pole-emploi.io/data/api/rome) API, you also need to get an API key from this service
 
-
 ### Installation
 
 If you meet the prerequisites, you can proceed to the installation of the project 
