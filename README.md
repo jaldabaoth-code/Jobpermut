@@ -51,7 +51,7 @@ If you meet the prerequisites, you can proceed to the installation of the projec
 9. Run `symfony console doctrine:fixtures:load` to load the fixtures in database
 10. Run `yarn encore dev` to build assets
 11. Run `symfony server:start` to launch symfony server
-12. Go to localhost:8000 on your browser
+12. Go to <b>localhost:8000</b> with your favorite browser
 
 ### Users
 
