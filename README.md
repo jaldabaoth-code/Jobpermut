@@ -36,12 +36,12 @@ If a route interests them, they can "match" in order to offer the job exchange.
 * WARNING : This app use [Open Route Service](https://openrouteservice.org/) API, you also need to get an API key from this service
 * WARNING : This app use [Pole emploi ROMEv1](https://pole-emploi.io/data/api/rome) API, you also need to get an API key from this service
 
-### Installation
+### Steps
 
 If you meet the prerequisites, you can proceed to the installation of the project 
 
-1. Clone the project from [Github](https://github.com/WildCodeSchool/orleans-202103-php-project-jobpermut/)
-2. Go in the project folder
+1. Clone the repo from GitHub : `git clone git@github.com:jaldabaoth-code/Jobpermut.git`
+2. Enter the directory : `cd Jobpermut`
 3. Open with your code editor
 4. Run `composer install` to install PHP dependencies
 5. Run `yarn install` to install JS dependencies
