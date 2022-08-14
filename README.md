@@ -56,16 +56,19 @@ If you meet the prerequisites, you can proceed to the installation of the projec
 ### Users
 
 Demo User :
-    login: john@doe.com
-    password: 123456789
+
+login: john@doe.com
+password: 123456789
 
 Admin user:
-  login: wildjobexchangeAdmin@gmail.com
-  password: admin123456789
+
+login: wildjobexchangeAdmin@gmail.com<br/>
+password: admin123456789
 
 SuperAdmin User:
-  login: wildjobexchangeSuperAdmin@gmail.com
-  password: admin123456789
+
+login: wildjobexchangeSuperAdmin@gmail.com<br/>
+password: admin123456789
 
 ### Built-With
 
