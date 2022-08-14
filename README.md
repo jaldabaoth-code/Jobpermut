@@ -57,7 +57,7 @@ If you meet the prerequisites, you can proceed to the installation of the projec
 
 Demo User :
 
-login: john@doe.com
+login: john@doe.com<br/>
 password: 123456789
 
 Admin user:
