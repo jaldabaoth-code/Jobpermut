@@ -63,7 +63,7 @@ Admin user:<br/>
 login: wildjobexchangeAdmin@gmail.com<br/>
 password: admin123456789
 
-SuperAdmin User:<br/><br/>
+SuperAdmin User:<br/>
 login: wildjobexchangeSuperAdmin@gmail.com<br/>
 password: admin123456789
 
